@@ -1,14 +1,20 @@
-﻿using Hardware.Info;
-using NOVA_CLI.Settings;
-using NOVA_CLI.Utils;
+﻿using NOVA_CLI.Utils;
 using Spectre.Console;
 using Spectre.Console.Cli;
 
 namespace NOVA_CLI.Commands;
 
-class SystemInfoCommand : AsyncCommand<SystemInformationSettings>
+internal class SystemInfoCommand : AsyncCommand<SystemInfoCommand.Settings>
 {
-    public override async Task<int> ExecuteAsync(CommandContext context, SystemInformationSettings settings)
+
+
+    internal class Settings : CommandSettings
+    {
+        [CommandArgument(0, "<info>")]
+        public string Info { get; set; } = "all";
+
+    }
+    public override async Task<int> ExecuteAsync(CommandContext context, Settings settings)
     {
         var hardwareInfo = new HardwareInfo();
 

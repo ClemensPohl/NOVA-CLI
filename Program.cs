@@ -1,58 +1,20 @@
-﻿namespace NOVA_CLI;
-public class Program
+﻿using Microsoft.Extensions.DependencyInjection;
+using NOVA_CLI.Config;
+
+namespace NOVA_CLI;
+internal class Program
 {
-    public static async Task<int> Main(string[] args)
+    static async Task<int> Main(string[] args)
     {
-        var app = new NovaCLI();
+        var serviceProvider = Bootstrapper.CreateServiceProvider();
 
-        // Important for spin animations etc..
-        Console.OutputEncoding = System.Text.Encoding.UTF8;
-
-
-        if (args.Length > 0)
-        {
-            return await app.RunAsync(args);
-        }
+        // Load App Default Config
+        var config = serviceProvider.GetRequiredService<AppConfiguration>();
+        config.LoadDefaultConfig();
 
 
-        Startup.ShowGreeting();
+        NovaCLI app = serviceProvider.GetRequiredService<NovaCLI>();
+        return await app.RunAsync(args);
 
-        while (true)
-        {
-            Console.Write("> ");
-            var input = Console.ReadLine();
-
-            if (string.IsNullOrWhiteSpace(input))
-                continue;
-
-            if (input.Equals("exit", StringComparison.OrdinalIgnoreCase))
-                break;
-
-            if(input.Equals("cls", StringComparison.OrdinalIgnoreCase) || input.Equals("clear", StringComparison.OrdinalIgnoreCase))
-            {       
-                Console.Clear();
-                continue;
-            }
-
-
-
-            var inputArgs = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-
-            try
-            {
-                await app.RunAsync(inputArgs);
-            } catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
-            
-        }
-
-        return 0;
-
-        
-
-        
-        
     }
 }

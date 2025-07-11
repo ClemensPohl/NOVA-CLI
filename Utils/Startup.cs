@@ -1,16 +1,12 @@
-﻿
+﻿using Spectre.Console;
 
-using Spectre.Console;
+namespace NOVA_CLI.Utils;
 
-namespace NOVA_CLI;
-
-public static class Startup
+internal static class Startup
 {
-    public static void ShowGreeting()
+    internal static void ShowGreeting()
     {
         AnsiConsole.Write(new FigletText("Nova-CLI").Color(Color.Cyan1));
         AnsiConsole.MarkupLine("[grey]Nova CLI v1.0[/]");
-
-        AnsiConsole.WriteLine();
     }
 }
