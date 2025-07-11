@@ -1,16 +1,20 @@
-﻿using NOVA_CLI.Commands;
-using NOVA_CLI.Utils;
+﻿using Microsoft.Extensions.DependencyInjection;
+using PCCore.NOVA_CLI.Commands;
+using PCCore.NOVA_CLI.Utils;
 using Spectre.Console;
 using Spectre.Console.Cli;
 
-namespace NOVA_CLI;
+namespace PCCore.NOVA_CLI;
 public class NovaCLI
 {
     private readonly CommandApp _app;
 
-    public NovaCLI()
+
+    public NovaCLI(IServiceCollection services)
     {
-        _app = new CommandApp();
+        var registrar = new TypeRegistrar(services);
+        _app = new CommandApp(registrar);
+
         _app.Configure(config =>
         {
             config.AddCommand<SystemInfoCommand>("sys");

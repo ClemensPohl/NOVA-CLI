@@ -1,6 +1,6 @@
 ﻿using Spectre.Console;
 
-namespace NOVA_CLI.Utils;
+namespace PCCore.NOVA_CLI.Utils;
 
 internal static class LoadingUtils
 {

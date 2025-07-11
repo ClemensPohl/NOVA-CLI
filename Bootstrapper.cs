@@ -1,18 +1,17 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using NOVA_CLI.Config;
-
-namespace NOVA_CLI;
+using PCCore.NOVA_CLI.Config;
+using PCCore.NOVA_HardwareInfo.Contracts;
+using PCCore.NOVA_HardwareInfo.InfoProvider;
 
 internal class Bootstrapper
 {
-    public static IServiceProvider CreateServiceProvider()
+    public static IServiceCollection CreateServiceCollection()
     {
         var services = new ServiceCollection();
 
         services.AddSingleton<AppConfiguration>();
-        services.AddSingleton<NovaCLI>();
+        services.AddTransient<IHardwareInfoProvider, WindowsHardwareInfoProvider>();
 
-        return services.BuildServiceProvider();
+        return services;
     }
-
 }

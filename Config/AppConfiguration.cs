@@ -1,7 +1,7 @@
 ﻿using System.Text;
 
 
-namespace NOVA_CLI.Config;
+namespace PCCore.NOVA_CLI.Config;
 
 internal class AppConfiguration
 {
