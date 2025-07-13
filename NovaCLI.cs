@@ -23,7 +23,7 @@ public class NovaCLI
 
     public async Task<int> RunAsync(string[] args)
     {
-        Startup.ShowGreeting();
+        SpectreRenderer.ShowGreeting();
 
         while(true)
         {

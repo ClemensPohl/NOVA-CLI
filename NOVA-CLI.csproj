@@ -18,4 +18,8 @@
     <ProjectReference Include="..\NOVA-HardwareInfo\NOVA-HardwareInfo.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+
 </Project>
